@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pokedex</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.contenedor {		
+			margin: auto;
+			padding: 20px 0px;
+		}
+
+		body {
+			text-align: center;
+		}
+
+		li {
+			list-style-type: none;
+		}
+			
+
+</style>
+<script type="text/javascript">
+	function getPokemon() {
+		const pokemon = document.getElementById('campo-de-busca').value
+		console.log(pokemon)  
+		event.preventDefault()
+	
+
+
+	fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon)
+	.then(function(response) {
+		return response.json().then(function(json) {
+		    console.log(json)
+				document.getElementById('ataque-valor').innerHTML = json.stats[4].base_stat
+				document.getElementById('avatar').src = json.sprites.front_default
+		})
+	})
+}
+</script>
+  </head>
+  <body>  
+  <div class="contenedor">
+		<form>	
+			<input type="text" id="campo-de-busca" placeholder="Busca"> </input>
+			<input type="submit" onclick="getPokemon()">
+		</form>
+
+	<div class="ajuda-pesquisa">
+		<p>
+			Digite o nome do pokémon para saber a força!		
+		</p>
+    <img src="" id="avatar" />
+		<ul>
+			<li>
+				Ataque = <span class="valor-do-atributo" id="ataque-valor">???</span>
+			</li>
+		</ul>
+	</div>
+	
+
+		
+
+	
+  </body>
+</html>
